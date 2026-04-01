@@ -110,22 +110,22 @@ This document explains how the template is meant to be used and demonstrates the
 The main insights of the template are:
 
 \ieeline
-\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{diagram-project}}{center}
+\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{sitemap}}{center}
 {\Large\color{subtitle}\textbf{A clear structure improves readability}}
 
 Separating the main narrative from supporting information helps the reader focus on the key message. The main text should contain the central argument, while the left sidebar should be used for concise supporting content.
 
 \ieeline
-\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{sliders}}{center}
+\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{paintbrush}}{center}
 {\Large\color{subtitle}\textbf{Consistent formatting supports clarity}}
 
 The consistent use of colors, highlighted blocks, figures, tables, units, and citations creates a coherent visual language. This improves readability and makes the document easier to navigate.
 
 \ieeline
-\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{scale-balanced}}{center}
+\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{recycle}}{center}
 {\Large\color{subtitle}\textbf{Reusable elements make report writing more efficient}}
 
-The template provides a small set of reusable components such as \texttt{sideBlock}, \texttt{sideNote}, \texttt{coloredBlock}, and side figures. These elements help authors structure reports consistently without redefining layout choices for each new project.
+The template provides a small set of reusable components such as \texttt{coloredBlock}, \texttt{sideBlock}, \texttt{sideNote},   \texttt{sideFigure}, and more. These elements help authors structure reports consistently without redefining layout choices for each new project.
 
 \clearpage
 
@@ -485,15 +485,15 @@ A subtle grey background (e.g. \texttt{greyLight}) can improve the visual integr
 
 \section{Side figures}
 
-\ieesidefigure[width=0.85\linewidth]{example-image}{Example of a side figure placed in the left sidebar.}{}{center}
+\sideFigure[width=0.85\linewidth]{example-image}{Example of a side figure placed in the left sidebar.}{}{center}
 
-The command \texttt{\textbackslash ieesidefigure} allows authors to place a compact figure in the sidebar. This is useful for small icons, supporting charts, or visual references that complement the nearby paragraph.
+The command \texttt{\textbackslash sideFigure} allows authors to place a compact figure in the sidebar. This is useful for small icons, supporting charts, or visual references that complement the nearby paragraph.
 
 A typical usage example is:
 
 \begin{coloredBlock}[grey]{}
 \begin{verbatim}
-\ieesidefigure[width=0.85\linewidth]{example-image}
+\sideFigure[width=0.85\linewidth]{example-image}
 {Example of a side figure.}{label}{center}
 \end{verbatim}
 \end{coloredBlock}
@@ -553,7 +553,7 @@ A good table should:
 
 \section{Tables in the sidebar}
 
-\ieesidetable{%
+\sideTable{%
 \scriptsize
 \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.2cm}@{}}
 \toprule
@@ -574,7 +574,7 @@ A typical usage example is:
 
 \begin{coloredBlock}[grey]{}
 \begin{verbatim}
-\ieesidetable{%
+\sideTable{%
 \scriptsize
 \scriptsize
 \begin{tabularx}{\linewidth}{@{}X>
