@@ -1,0 +1,829 @@
+\documentclass[11pt,a4paper]{report}
+
+%% -----------------------------------------------------------------------------
+%% Metadata
+%% -----------------------------------------------------------------------------
+% Select language
+\newcommand{\documentlanguage}{english} %german or english
+
+\newcommand{\reporttitle}{IEE Template}
+\newcommand{\reportsubtitle}{for \LaTeX~Reports}
+\newcommand{\reportyear}{2026}
+\newcommand{\reportmonth}{April}
+\newcommand{\reportauthors}{R. Gaugl}
+\newcommand{\reportpartners}{Partner Company 1, Partner Company 2}
+\newcommand{\reportversion}{1.0}
+\newcommand{\reportcity}{Graz}
+
+
+%% -----------------------------------------------------------------------------
+%% Packages
+%% -----------------------------------------------------------------------------
+\usepackage{iee-report}
+\usepackage{fontawesome7}
+\usepackage{pgfplots}
+\usepackage{pgf-pie}
+\pgfplotsset{compat=1.18} % or your current pgfplots version
+\usepackage{csquotes} % Recommended with babel + biblatex
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs} % Optional, for better lines in tables
+\UseTblrLibrary{siunitx}
+
+
+%% -----------------------------------------------------------------------------
+%% Options
+%% -----------------------------------------------------------------------------
+
+% Change how numbers appear when using \SI{}{}
+\ifthenelse{\equal{\documentlanguage}{german}}{
+    \sisetup{
+        output-decimal-marker = {,},  % use comma as decimal separator
+        group-separator = {.},        % use dot as thousand separator
+        group-minimum-digits = 4,     % format large numbers
+        group-digits=integer,
+        detect-mode = true,
+        detect-family = false,
+        }
+}{
+    \sisetup{
+        output-decimal-marker = {.},  % use comma as decimal separator
+        group-separator = {~},        % use space as thousand separator
+        group-minimum-digits = 4,     % optional: format large numbers
+        group-digits=integer,
+        detect-mode = true,
+        detect-family = false,
+    }
+}
+\DeclareSIUnit \watthour {Wh} % apparent power 
+
+%% -----------------------------------------------------------------------------
+% Start of the actual document
+%% -----------------------------------------------------------------------------
+\begin{document}
+
+%% -----------------------------------------------------------------------------
+% Pre-content pages (front matter)
+%% -----------------------------------------------------------------------------
+
+%% -----------------------------------------------------------------------------
+%% COVER PAGE ------------------------------------------------------------------
+\makeieecover
+
+%% -----------------------------------------------------------------------------
+%% IMPRINT PAGE ----------------------------------------------------------------
+\pagenumbering{roman}
+\makeieeimprint[\scriptsize Icons used in this report from Font Awesome (\url{https://fontawesome.com}), licensed under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.]
+
+%% -----------------------------------------------------------------------------
+%% TABLE OF CONTENTS ----------------------------------------------------------=
+\ifthenelse{\equal{\documentlanguage}{german}}{
+    \chapter*{Inhaltsverzeichnis}
+}{
+    \chapter*{Table of Contents}
+} % The header is automatically selected based on the chosen language.
+
+\makeatletter
+\@starttoc{toc}
+\makeatother
+
+\clearpage
+
+%% -----------------------------------------------------------------------------
+% Main content (body of the document)
+%% -----------------------------------------------------------------------------
+% Switch to Arabic page numbers
+\pagenumbering{arabic}
+
+%% -----------------------------------------------------------------------------
+%% EXECUTIVE SUMMARY ----------------------------------------------------------=
+
+\chapter*{Executive Summary}
+\addcontentsline{toc}{chapter}{Executive Summary} % add to TOC without number
+\markboth{Executive Summary}{Executive Summary}
+
+This template provides a structured foundation for writing professional reports with a clear visual language and a consistent layout. It combines a main text column for the central narrative with a dedicated left sidebar for short contextual elements, figures, and highlighted remarks.
+
+The template is intended to help authors communicate methods, assumptions, results, and recommendations in a concise and transparent manner. It can be used for technical studies, project reports, assessments, and methodological documents.
+
+This document explains how the template is meant to be used and demonstrates the most important elements directly within the report itself.
+
+The main insights of the template are:
+
+\ieeline
+\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{diagram-project}}{center}
+{\Large\color{subtitle}\textbf{A clear structure improves readability}}
+
+Separating the main narrative from supporting information helps the reader focus on the key message. The main text should contain the central argument, while the left sidebar should be used for concise supporting content.
+
+\ieeline
+\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{sliders}}{center}
+{\Large\color{subtitle}\textbf{Consistent formatting supports clarity}}
+
+The consistent use of colors, highlighted blocks, figures, tables, units, and citations creates a coherent visual language. This improves readability and makes the document easier to navigate.
+
+\ieeline
+\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{scale-balanced}}{center}
+{\Large\color{subtitle}\textbf{Reusable elements make report writing more efficient}}
+
+The template provides a small set of reusable components such as \texttt{sideBlock}, \texttt{sideNote}, \texttt{coloredBlock}, and side figures. These elements help authors structure reports consistently without redefining layout choices for each new project.
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% INTRODUCTION ----------------------------------------------------------------
+\chapter{Introduction}
+
+\begin{sideNote}[blue]{Getting started}
+Before adding content, it is good practice to define the report title, subtitle, authors, and date in the metadata section at the top of \texttt{main.tex}.
+\end{sideNote}
+
+This report serves both as a template and as a guide. It demonstrates the layout, the most important commands, and the intended use of the main visual elements. The goal is not only to provide a technically working document, but also to illustrate how the different components should be combined in practice.
+
+At the beginning of the file, the report metadata can be adapted. This includes the language, title, subtitle, authors, version, city, and date. These values are used throughout the template, for example on the cover page and on the imprint page.
+
+
+
+A typical starting point looks as follows:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\newcommand{\documentlanguage}{english}
+\newcommand{\reporttitle}{IEE Template}
+\newcommand{\reportsubtitle}{for \LaTeX~Reports}
+\newcommand{\reportyear}{2026}
+\newcommand{\reportauthors}{R. Gaugl}
+\end{verbatim}
+\end{coloredBlock}
+
+The language setting controls the language-dependent labels in the template. The layout itself remains the same, but labels such as the institute name, references title, and other predefined texts adapt automatically.
+
+\section{General layout concept}
+
+\begin{sideBlock}[yellow]{\faIcon{lightbulb}~~Recommended use}
+Use the main text column for arguments, explanations, and results. Use the sidebar for assumptions, short notes, icons, mini figures, or compact contextual information.
+\end{sideBlock}
+
+The template uses a two-part page design. The right-hand area is the main text column and should contain the central narrative of the report. The left-hand area is a sidebar and is intended for short, supporting content such as remarks, contextual information, icons or mini figures.
+
+This design is particularly useful for technical reports, because it allows the document to remain readable while still presenting supporting information close to the relevant paragraph.
+
+
+
+\section{How to work with the template}
+
+A practical workflow is to start with the chapter and section structure, then add the main text, and finally complement the content with sidebar elements, figures, and tables. This sequence helps ensure that the report remains well structured and does not become overloaded with decorative elements too early in the writing process.
+
+\clearpage
+
+%% -----------------------------------------------------------------------------
+%% COLORS  ---------------------------------------------------------------------
+\chapter{Colors}
+
+The template includes a consistent color system with base colors as well as light and dark variants. These colors are intended to be used systematically. The base color is usually used for title bars and stronger emphasis, the light variant is used for subtle backgrounds, and the dark variant is used for text inside boxes or borders.
+
+The most relevant colors in the current template are \texttt{blue}, \texttt{yellow}, \texttt{green}, \texttt{grey}, \texttt{turquoise}, \texttt{red}, and \texttt{iee}  together with their corresponding \texttt{Light} and \texttt{Dark} variants.
+
+\vspace{0.1cm}
+\begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X@{}}
+\textbf{Light Shades} & \textbf{Standard} & \textbf{Dark Shades} \\[0.3em]
+
+\colorbox{greyLight}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{greyDark} greyLight}} &
+\colorbox{grey}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} grey}} &
+\colorbox{greyDark}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} greyDark}} \\[0.3em]
+
+\colorbox{blueLight}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{blueDark} blueLight}} &
+\colorbox{blue}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} blue}} &
+\colorbox{blueDark}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} blueDark}} \\[0.3em]
+
+\colorbox{ieeLight}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{ieeDark} ieeLight}} &
+\colorbox{iee}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} iee}} &
+\colorbox{ieeDark}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} ieeDark}} \\[0.3em]
+
+\colorbox{redLight}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{redDark} redLight}} &
+\colorbox{red}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} red}} &
+\colorbox{redDark}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} redDark}} \\[0.3em]
+
+\colorbox{turquoiseLight}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{turquoiseDark} turquoiseLight}} &
+\colorbox{turquoise}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} turquoise}} &
+\colorbox{turquoiseDark}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} turquoiseDark}} \\[0.3em]
+
+\colorbox{greenLight}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{greenDark} greenLight}} &
+\colorbox{green}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} green}} &
+\colorbox{greenDark}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} greenDark}} \\[0.3em]
+
+\colorbox{yellowLight}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{yellowDark} yellowLight}} &
+\colorbox{yellow}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} yellow}} &
+\colorbox{yellowDark}{\parbox[c][1.2em][c]{\linewidth}{\centering\color{white} yellowDark}} \\
+\end{tabularx}
+
+\section{Why the color system matters}
+
+The color system is not only decorative. It creates a visual hierarchy. It helps the reader distinguish between headings, supporting information, recommendations, and neutral content. When used consistently, it improves both readability and orientation.
+
+\begin{coloredBlock}[blue]{}
+Colors should not be applied arbitrarily. A highlighted color should signal a specific type of information, such as a recommendation, an assumption, or an important methodological note.
+\end{coloredBlock}
+
+\begin{coloredBlock}[yellow]{}
+A second color can be used to distinguish recommendations or special notes from general explanatory content. This helps separate different levels of importance within the document.
+\end{coloredBlock}
+
+\begin{coloredBlock}[green]{}
+Additional colors can be introduced for special categories of content, but it is advisable to keep the overall color palette limited and consistent throughout the report.
+\end{coloredBlock}
+
+\section{Typical usage}
+
+A simple and robust rule is to use:
+\begin{itemize}
+    \item blue for standard structural emphasis,
+    \item yellow for recommendations or warnings,
+    \item green for positive findings or methodological support,
+    \item grey for neutral or secondary visual elements.
+\end{itemize}
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% BOXES -----------------------------------------------------------------------
+\chapter{Highlight Boxes}
+
+The \texttt{coloredBlock} environment provides a flexible way to emphasize information inside the main text area. It can be used with a title or without a title, depending on the intended emphasis.
+
+\section{Using \texttt{coloredBlock} with a title}
+
+When a clear label is helpful, such as ``Recommendation'', ``Finding'', or ``Methodological note'', the titled version is usually preferable.
+
+A \texttt{coloredBlock} can be called as follows:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\begin{coloredBlock}[yellow]{Practical recommendation}
+This is a highlighted recommendation.
+\end{coloredBlock}
+\end{verbatim}
+\end{coloredBlock}
+
+\begin{coloredBlock}[yellow]{\faIcon{bolt}~~Practical recommendation}
+Use titled blocks when the reader should immediately understand the purpose of the highlighted content. Titles are particularly useful for key findings, recommendations, or structured remarks.
+\end{coloredBlock}
+
+\section{Using \texttt{coloredBlock} without a title}
+
+For short emphasis within the main text, the block can also be used without a title. Just leave the second argument empty:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\begin{coloredBlock}[blue]{}
+This is a highlighted block without a title.
+\end{coloredBlock}
+\end{verbatim}
+\end{coloredBlock}
+
+\begin{coloredBlock}[blue]{}
+This is an example of a \texttt{coloredBlock} without a title. This version is useful when the visual emphasis is sufficient and no additional label is required.
+\end{coloredBlock}
+
+\section{When to use a highlighted block}
+
+A highlighted block is most effective when it is used selectively. It should not replace the main text, but it can improve the structure of a report by drawing attention to particularly important statements.
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% SIDEBAR ELEMENTS ------------------------------------------------------------
+\chapter{Sidebar Elements}
+
+The sidebar is one of the defining features of the template. It allows the author to place short complementary content next to the main text without interrupting the narrative flow. This is especially useful for technical reports in which definitions, assumptions, or contextual notes should remain visible but should not dominate the main explanation.
+
+\section{Using \texttt{sideBlock}}
+
+\begin{sideBlock}[yellow]{Recommendation}
+Keep sidebar content concise. A side block should support the main text, not replace it. If the content becomes too long, it should usually move into the main text area.
+\end{sideBlock}
+
+The \texttt{sideBlock} environment is designed for structured, visually highlighted sidebar content. It is suitable for practical recommendations, definitions, assumptions, reading guides, and compact summaries.
+
+A typical usage example is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\begin{sideBlock}[yellow]{Practical recommendation}
+Use the left sidebar for supporting material.
+\end{sideBlock}
+\end{verbatim}
+\end{coloredBlock}
+
+\section{Using \texttt{sideNote}}
+
+\begin{sideNote}[blue]{Assumption}
+Short assumptions, notes, or clarifications are good candidates for a side note.
+\end{sideNote}
+
+The \texttt{sideNote} environment is simpler than \texttt{sideBlock}. It is suitable for short textual remarks without a surrounding frame. It works well for assumptions, writing tips, methodological hints, or compact observations.
+
+A typical usage example is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\begin{sideNote}[blue]{Assumption}
+This is a short note in the left sidebar.
+\end{sideNote}
+\end{verbatim}
+\end{coloredBlock}
+
+\section{Placing sidebar elements}
+
+Sidebar elements are attached to the current position in the text. This means that they should be placed near the paragraph to which they belong. If several margin elements are inserted one after another without intervening text, they may appear very close to each other or overlap visually. It is therefore advisable to distribute them naturally across the page.
+
+\begin{coloredBlock}[blue]{Placement guideline}
+The sidebar should contain short, relevant, and well-positioned information. The most effective side elements are directly related to the nearby text and remain short enough to be read quickly.
+\end{coloredBlock}
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% ICONS -----------------------------------------------------------------------
+\chapter{Icons}
+
+Icons can improve visual clarity and support quick comprehension. When used carefully, they help readers identify the purpose of a section, distinguish different types of information, and navigate the report more easily.
+
+The recommended option in \LaTeX{} is to use icons from the \texttt{fontawesome7} package. This package provides a large set of scalable icons that integrate well with the typography of the document. A list of available icons can be found in the \href{https://mirror.easyname.at/ctan/fonts/fontawesome5/doc/fontawesome5.pdf}{package documentation}. Add an attribution in the report (e.g. on the imprint page) or appendix if required by the icon source.
+
+If icons from external sources are used instead, they should follow a consistent visual style and match the overall appearance of the report. It is also important to verify that the appropriate usage rights are available before including third-party icons in the document.
+
+\section{Loading the package}
+
+To use Font Awesome icons, the following package is loaded in the preamble:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\usepackage{fontawesome5}
+\end{verbatim} 
+\end{coloredBlock}
+
+After that, icons can be inserted with commands such as:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\faIcon{bolt}
+\faIcon{lightbulb}
+\faIcon{scale-balanced}
+\end{verbatim}
+\end{coloredBlock}
+
+For example, this produces a bolt icon: \faIcon{bolt}, while this produces a lightbulb icon: \faIcon{lightbulb}.
+
+\section{Using icons in the sidebar}
+
+\sideIcon{\vspace{0.2cm}\fontsize{36}{40}\selectfont\color{blue}\faIcon{arrows-to-circle}}{center}
+
+Icons work particularly well in the sidebar, where they can provide a compact visual cue next to key messages or highlighted content. The executive summary at the beginning of this document already demonstrates this approach. There, icons are placed in the left column with \texttt{\textbackslash sideIcon} and combined with short headline-style statements in the main text.
+
+A typical example looks as follows:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\sideIcon{\faIcon{arrows-to-circle}}{center}
+\end{verbatim}
+\end{coloredBlock}
+
+This is especially useful for executive summaries, key findings, or short thematic introductions.
+
+\section{Using icons in \texttt{coloredBlock} titles}
+
+Icons can also be used directly inside the titles of \texttt{coloredBlock} environments. This is a simple and effective way to make recommendations, warnings, notes, or methodological remarks more visible.
+
+A typical example is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\begin{coloredBlock}[yellow]{\faIcon{bolt}~~Title}
+Use the left sidebar for supporting material.
+\end{coloredBlock}
+\end{verbatim}
+\end{coloredBlock}
+
+This creates a highlighted block whose title combines an icon and text. The double tilde \texttt{\~{}\~{}} adds a small horizontal space between the icon and the title text.
+
+\begin{coloredBlock}[yellow]{\faIcon{bolt}~~Practical recommendation}
+Icons can be placed directly in block titles to strengthen the visual structure of the report and to make recurring content types easier to identify.
+\end{coloredBlock}
+
+\section{Design guidance}
+
+\begin{sideBlock}[yellow]{\faIcon{icons}~~Recommendation}
+Choose a small number of recurring icons and use them consistently across the report. This creates a clearer visual language than assigning a new icon to every single element.
+\end{sideBlock}
+
+Icons should be used with restraint. They are most effective when they support the structure of the document rather than competing with it. A small and consistent set of icons is usually better than using many unrelated symbols.
+
+The following general principles are recommended:
+\begin{itemize}
+    \item Use icons only when they improve orientation or understanding.
+    \item Keep the icon style consistent throughout the report.
+    \item Use similar icon sizes for similar purposes.
+    \item Check the visual contrast when icons are used in colored titles or side elements.
+\end{itemize}
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% FIGURES ---------------------------------------------------------------------
+\chapter{Figures}
+
+Figures are an important part of many reports. The template supports standard in-text figures, full-width figures, and small side figures in the sidebar.
+
+\section{Standard figures}
+
+A standard figure should be used when the graphic belongs directly to the main flow of the text and can be displayed at the normal text width.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{example-image}
+    \caption{Example of a standard figure at the width of the main text column.}
+    \label{fig:standard-figure}
+\end{figure}
+
+Standard figures should always have a clear caption and, if they are referenced in the text, a label.
+
+\section{Full-width figures}
+
+Some graphics require more horizontal space than the main text column provides. In that case, a full-width figure can be used. This format is particularly suitable for complex diagrams, wide charts, or process illustrations.
+
+\begin{coloredBlock}[yellow]{Design tip}
+A subtle grey background (e.g. \texttt{greyLight}) can improve the visual integration of full-width figures. It separates the figure from the main text without drawing too much attention.
+\end{coloredBlock}
+
+\begin{figure}[h]
+    \noindent\hspace*{-4.8cm}%
+    \colorbox{greyLight}{%
+        \begin{minipage}{\dimexpr\paperwidth-2.2cm-2.2cm\relax}
+            \vspace{0.25cm}
+            \hspace*{0.25cm}%
+            \includegraphics[
+                width=\dimexpr\linewidth-0.5cm\relax,
+                height=5cm
+            ]{example-image}
+            \captionsetup{
+                width=\dimexpr\linewidth-0.5cm\relax,
+                justification=raggedright,
+                singlelinecheck=false
+            }
+            \caption{Example of a full-width figure. This format is useful for graphics that require more horizontal space.}
+            \label{fig:full-width-figure}
+            \vspace{0.25cm}
+        \end{minipage}%
+    }
+\end{figure}
+
+
+\section{Side figures}
+
+\ieesidefigure[width=0.85\linewidth]{example-image}{Example of a side figure placed in the left sidebar.}{}{center}
+
+The command \texttt{\textbackslash ieesidefigure} allows authors to place a compact figure in the sidebar. This is useful for small icons, supporting charts, or visual references that complement the nearby paragraph.
+
+A typical usage example is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\ieesidefigure[width=0.85\linewidth]{example-image}
+{Example of a side figure.}{label}{center}
+\end{verbatim}
+\end{coloredBlock}
+
+The final argument controls the alignment inside the sidebar and can be set to \texttt{left}, \texttt{center}, or \texttt{right}.
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% TABLES ----------------------------------------------------------------------
+\chapter{Tables}
+
+Tables should be clean, readable, and used only when a structured tabular presentation provides added value compared to a short paragraph or a figure. Numerical values should be aligned consistently, and units should be stated clearly.
+
+\section{Using \texttt{tabularray} with \texttt{siunitx}}
+
+The current template loads \texttt{tabularray} together with the \texttt{siunitx} library. This enables decimal-aligned number columns and a compact table style.
+
+\begin{tblr}{
+      colspec = {
+            l
+            S[table-format=4.1]
+            S[table-format=3.1]
+            S[table-format=3.1]
+            S[table-format=3.1]
+      },
+      hline{1-2}={solid,1pt},
+      hline{3-Y}={grey},
+      hline{Z}={solid,1pt},
+      row{odd}={grey!20},
+      row{1}={white,font=\bfseries},
+      cell{4}{2}={yellowLight, cmd=\textbf},
+      cell{4}{3}={yellowLight, cmd=\textbf},
+    }
+    \textbf{Power Plant Type} & \textbf{2022} & \textbf{2023} & \textbf{2024} & \textbf{2025} \\
+    Coal           & 25.3 & 20.6 & 15.9 & 10.5 \\
+    Gas            & 75.3 & 70.5 & 60.2 & 55.6 \\
+    Run-of-River   & 40.3 & 45.0 & 50.0 & 50.0 \\
+    PV             & 50.5 & 70.5 & 90.7 & 120.0 \\
+    Wind           & 80.0 & 90.2 & 110.3 & 130.4 \\
+    Storage Hydro  & 10.7 & 20.0 & 30.7 & 40.2 \\
+\end{tblr}
+
+\section{A simple table guideline}
+
+A good table should:
+\begin{itemize}
+    \item have a clear purpose,
+    \item avoid unnecessary decorative elements,
+    \item use consistent numerical formatting,
+    \item and remain readable without excessive width.
+\end{itemize}
+
+\section{Tables in the sidebar}
+
+\ieesidetable{%
+\scriptsize
+\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.2cm}@{}}
+\toprule
+Technology & Share [\%] \\
+\midrule
+PV    & 32 \\
+Wind  & 41 \\
+Hydro & 27 \\
+\bottomrule
+\end{tabularx}
+}{Example of a compact side table placed in the left sidebar.}
+
+A side table can also be placed in the sidebar using \texttt{\textbackslash ieesidetable}, but only for very compact tabular content.
+
+This type of table is particularly useful for small summaries, key parameters, or compact comparison values that support the main text without interrupting the overall flow of the report.
+
+A typical usage example is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\ieesidetable{%
+\scriptsize
+\scriptsize
+\begin{tabularx}{\linewidth}{@{}X>
+{\raggedleft\arraybackslash}p{1.2cm}@{}}
+\toprule
+Technology & Share [\%] \\
+\midrule
+PV    & 32 \\
+Wind  & 41 \\
+Hydro & 27 \\
+\bottomrule
+\end{tabularx}
+}{Example of a compact side table placed in the left 
+sidebar.}
+\end{verbatim}
+\end{coloredBlock}
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% NUMBERS AND UNITS -----------------------------------------------------------
+\chapter{Numbers and Units}
+
+Consistent formatting of numbers and units is essential in technical reports. The template is set up to use \texttt{siunitx}, which ensures consistent decimal separators, group separators, and spacing between numbers and units.
+
+\section{Why use \texttt{siunitx}}
+
+Manual formatting of numbers and units often leads to inconsistencies. For example, decimal markers may change across the report, spaces may be missing between values and units, and large numbers may become difficult to read. Using \texttt{siunitx} avoids these problems.
+
+\begin{coloredBlock}[blue]{Use \texttt{siunitx} consistently}
+Use \texttt{\textbackslash num\{\}} for plain numbers and \texttt{\textbackslash SI\{\}\{\}} for values with units. This keeps the formatting of the entire report consistent.
+\end{coloredBlock}
+
+\section{Examples}
+
+The following examples illustrate the intended usage:
+
+\begin{itemize}
+    \item A plain number: \num{12345.67}
+    \item An energy value: \SI{1200}{\mega\watthour}
+    \item A percentage can also be handled consistently: \SI{12.5}{\percent}
+\end{itemize}
+
+The corresponding code is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\num{12345.67}
+\SI{50}{\mega\watt}
+\SI{1200}{\watthour}
+\SI{12.5}{\percent}
+\end{verbatim}
+\end{coloredBlock}
+
+\section{Language-dependent formatting}
+
+\begin{sideNote}[blue]{Formatting note}
+Even when language settings are available, the report should still use a consistent notation for all numerical values and units from beginning to end.
+\end{sideNote}
+
+The template already adapts the decimal and group separators depending on the selected language. This means that a report in German can use a comma as the decimal separator, while a report in English can use a point, without changing the content manually throughout the file.
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% STRUCTURE AND STYLE ---------------------------------------------------------
+\chapter{Structure and Style}
+
+A well-structured report is easier to read and easier to maintain. The template supports this by separating structural elements clearly and by encouraging a balance between the main text and the sidebar.
+
+\section{How to structure the main text}
+
+The main text should contain the central narrative of the report. This includes:
+\begin{itemize}
+    \item the motivation and context,
+    \item the methodological approach,
+    \item the assumptions and scenarios,
+    \item the results,
+    \item and the discussion and conclusions.
+\end{itemize}
+
+Paragraphs should remain focused. Each paragraph should usually cover one main idea. Long blocks of text without visual relief should be avoided.
+
+\section{How to use the sidebar effectively}
+
+\begin{sideBlock}[yellow]{\faIcon{pen}~~Writing recommendation}
+If a sidebar element becomes too long, it is often a sign that the content should be moved into the main text and explained there in full.
+\end{sideBlock}
+
+The sidebar should contain short content that supports the main text. It should not become a second full text column. Typical sidebar content includes:
+\begin{itemize}
+    \item practical recommendations,
+    \item short assumptions,
+    \item definitions,
+    \item icons or mini figures,
+    \item compact contextual notes.
+\end{itemize}
+
+
+
+\section{Using sections and subsections}
+
+The report should use chapters, sections, and subsections in a consistent hierarchy. Section titles should remain concise and descriptive. A reader should be able to understand the structure of the report by reading only the table of contents.
+
+\clearpage
+
+%% -----------------------------------------------------------------------------
+%% REFERENCES ------------------------------------------------------------------
+\chapter{References}
+References are a key part of a technical report. They document sources, support claims, and improve the transparency of the analysis. The template is set up with \texttt{biblatex} and \texttt{biber}.
+
+\section{Using citations}
+
+A citation should be inserted whenever a statement, method, data source, or figure is based on external work. This helps distinguish original contributions from referenced material.
+
+A typical citation command is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\citep{Hunt2019}
+\end{verbatim}
+\end{coloredBlock}
+
+For example, storage technologies are often discussed in the literature in the context of system transformation and flexibility provision \citep{Hunt2019}.
+
+\section{Different citation styles}
+
+The template supports different citation commands depending on how the reference should appear in the sentence.
+
+If the authors should appear as part of the sentence, \texttt{\textbackslash citet\{\}} or \texttt{\textbackslash textcite\{\}} should be used. This is useful when the cited study is grammatically integrated into the text.
+
+A typical example is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+\citet{gaugl2023} demonstrate that rising CO2 prices
+result in higher electricity prices in Austria.
+\end{verbatim}
+\end{coloredBlock}
+
+This produces a sentence of the following form:
+
+\textit{\citet{gaugl2023} demonstrate that rising CO2 prices result in higher electricity prices in Austria.}
+
+If the reference should only appear as a citation at the end of a statement, \texttt{\textbackslash cite\{\}} or \texttt{\textbackslash citep\{\}} can be used.
+
+\newpage
+
+A typical example is:
+
+\begin{coloredBlock}[grey]{}
+\begin{verbatim}
+The LEGO model is an energy system optimization model
+developed at the Institute of Electricity Economics and
+Energy Innovation \cite{wogrin2022}.
+\end{verbatim}
+\end{coloredBlock}
+
+This produces a sentence of the following form:
+
+\textit{The LEGO model is an energy system optimization model developed at the Institute of Electricity Economics and Energy Innovation. \cite{wogrin2022}}
+
+In practice, the choice depends on the role of the citation in the sentence. If the authors are part of the narrative, \texttt{\textbackslash citet\{\}} or \texttt{\textbackslash textcite\{\}} is usually the better option. If the source only documents the preceding statement, \texttt{\textbackslash cite\{\}} or \texttt{\textbackslash citep\{\}} is often more appropriate.
+
+\section{Cross-referencing figures and tables}
+
+Figures and tables should be labeled and referenced from the text. This makes the document easier to navigate and avoids ambiguity. For example, the full-width illustration introduced earlier can be referenced as Figure~\ref{fig:full-width-figure}.
+
+\begin{coloredBlock}[blue]{Cross-reference consistently}
+Every figure or table that is important for the argument should have a label and should be referenced in the text. Readers should not have to infer which visual element is being discussed.
+\end{coloredBlock}
+
+\clearpage
+
+%% -----------------------------------------------------------------------------
+%% PRACTICAL TIPS --------------------------------------------------------------
+\chapter{Practical Tips}
+
+This final chapter summarizes a few practical recommendations for using the template efficiently.
+
+\begin{coloredBlock}[yellow]{\faIcon{screwdriver-wrench}~~Practical tips}
+Start with the overall report structure before writing detailed content. Add the main narrative first, then complement it with side notes, side blocks, figures, and tables. Compile frequently to check whether the sidebar content is positioned appropriately and whether page breaks remain visually consistent.
+\end{coloredBlock}
+
+\section{Recommended workflow}
+
+A practical workflow can follow these steps:
+\begin{enumerate}
+    \item Define the metadata and language at the top of the file.
+    \item Create the chapter and section structure.
+    \item Write the main text of each chapter.
+    \item Add figures, tables, and highlighted blocks.
+    \item Add sidebar elements only where they provide real value.
+    \item Check captions, labels, citations, and page layout.
+\end{enumerate}
+
+\section{What to avoid}
+
+Authors should avoid overusing highlighted elements. Too many blocks, icons, or sidebar notes can reduce clarity instead of improving it. The best results are usually achieved when the layout is used with restraint and when visual emphasis is reserved for genuinely important content.
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% CONCLUSION ------------------------------------------------------------------
+\chapter{Conclusion}
+
+This document has demonstrated the main design and usage principles of the IEE report template. It has shown how the template combines a structured main text column with a flexible left sidebar and a consistent visual language.
+
+The template is intended to support professional, transparent, and readable reporting. By using the provided building blocks consistently, authors can create reports that are visually coherent and easy to navigate while still remaining flexible enough for a wide range of report types.
+
+\clearpage
+
+
+%% -----------------------------------------------------------------------------
+%% Bibliography ----------------------------------------------------------------
+\appendix
+\ifthenelse{\equal{\documentlanguage}{german}}{
+    \chapter{Referenzen}
+}{
+    \chapter{References}
+} % The header is automatically selected based on the chosen language.
+
+{\small
+\printbibliography[heading=none]
+}
+
+% % References
+% \printbibliography[
+% heading=bibintoc
+% ]
+
+%% -----------------------------------------------------------------------------
+%% Appendix --------------------------------------------------------------------
+\chapter{Appendix}
+
+The appendix can be used for supplementary material such as additional tables, extended methodological notes, scenario definitions, data descriptions, or additional figures that would interrupt the flow of the main report.
+
+\section{Example appendix content}
+
+This section can contain:
+\begin{itemize}
+    \item detailed parameter tables,
+    \item additional charts,
+    \item sensitivity assumptions,
+    \item extended model descriptions,
+    \item code notes or variable definitions.
+\end{itemize}
+
+An appendix should remain structured and should only contain material that supports the main report but is not essential for the first reading.
+
+
+\end{document}
