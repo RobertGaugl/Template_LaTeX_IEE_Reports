@@ -56,3 +56,5 @@ The main text area should contain the central narrative of the report.
 ## Release Notes
 - **2026-04-01:**
    - First upload.
+   - Use squares for itemize.
+   - Add backpage.

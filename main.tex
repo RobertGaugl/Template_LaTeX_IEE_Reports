@@ -512,7 +512,10 @@ Tables should be clean, readable, and used only when a structured tabular presen
 \section{Using \texttt{tabularray} with \texttt{siunitx}}
 
 The current template loads \texttt{tabularray} together with the \texttt{siunitx} library. This enables decimal-aligned number columns and a compact table style.
-
+\begin{table}[h]
+\centering
+\caption{Example of a table created with \texttt{tabularray} and \texttt{siunitx}.}
+\label{tab:power-plant-example}
 \begin{tblr}{
       colspec = {
             l
@@ -537,13 +540,13 @@ The current template loads \texttt{tabularray} together with the \texttt{siunitx
     Wind           & 80.0 & 90.2 & 110.3 & 130.4 \\
     Storage Hydro  & 10.7 & 20.0 & 30.7 & 40.2 \\
 \end{tblr}
+\end{table}
 
 \section{A simple table guideline}
 
 A good table should:
 \begin{itemize}
     \item have a clear purpose,
-    \item avoid unnecessary decorative elements,
     \item use consistent numerical formatting,
     \item and remain readable without excessive width.
 \end{itemize}
@@ -789,7 +792,7 @@ The template is intended to support professional, transparent, and readable repo
 
 
 %% -----------------------------------------------------------------------------
-%% Bibliography ----------------------------------------------------------------
+%% BIBLIOGRAPHY ----------------------------------------------------------------
 \appendix
 \ifthenelse{\equal{\documentlanguage}{german}}{
     \chapter{Referenzen}
@@ -807,7 +810,7 @@ The template is intended to support professional, transparent, and readable repo
 % ]
 
 %% -----------------------------------------------------------------------------
-%% Appendix --------------------------------------------------------------------
+%% APPENDIX --------------------------------------------------------------------
 \chapter{Appendix}
 
 The appendix can be used for supplementary material such as additional tables, extended methodological notes, scenario definitions, data descriptions, or additional figures that would interrupt the flow of the main report.
@@ -825,5 +828,9 @@ This section can contain:
 
 An appendix should remain structured and should only contain material that supports the main report but is not essential for the first reading.
 
+
+%% -----------------------------------------------------------------------------
+%% BACK PAGE -------------------------------------------------------------------
+\makeieebackpage
 
 \end{document}

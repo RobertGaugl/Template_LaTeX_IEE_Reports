@@ -32,6 +32,7 @@
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{needspace}
 \RequirePackage[table]{xcolor}
+\RequirePackage{amssymb}
 
 %===============================================================================
 % Language and typography
@@ -42,6 +43,31 @@
     \RequirePackage[english]{babel}       % English hyphenation and terms
 }
 
+%===============================================================================
+% Lists
+%===============================================================================
+\newcommand{\tugrazlabelwidth}{7mm}
+
+\setlist[itemize,1]{
+  label=\makebox[\tugrazlabelwidth][l]{\raisebox{0.2ex}{\tiny$\blacksquare$}},
+  labelsep=0pt,
+  leftmargin=\dimexpr\tugrazlabelwidth+0.5em\relax,
+  itemindent=0pt
+}
+
+\setlist[itemize,2]{
+  label=\makebox[\tugrazlabelwidth][l]{\raisebox{0.2ex}{\tiny$\blacksquare$}},
+  labelsep=0pt,
+  leftmargin=\dimexpr\tugrazlabelwidth+0.5em\relax,
+  itemindent=0pt
+}
+
+\setlist[itemize,3]{
+  label=\makebox[\tugrazlabelwidth][l]{\raisebox{0.2ex}{\tiny$\blacksquare$}},
+  labelsep=0pt,
+  leftmargin=\dimexpr\tugrazlabelwidth+0.5em\relax,
+  itemindent=0pt
+}
 
 % -------------------------------------------------
 % Labels with bilingual support
@@ -96,13 +122,6 @@
 % Colors inspired by IEE / TU Graz
 % Adjust to match your exact design specification if needed.
 % -------------------------------------------------
-% \definecolor{IEE}{HTML}{3B5A70}%{003B49}
-% \definecolor{IEEDark}{HTML}{3B5A70}%{003B49}
-% \definecolor{IEEAccent}{HTML}{e4154b}
-% \definecolor{IEELight}{HTML}{D3DFE8}%{E9EEF0}
-% \definecolor{IEEGray}{HTML}{6E7B81}%{6E7B81}
-% \definecolor{IEELightGray}{HTML}{EDEDED}%{6E7B81}
-% \definecolor{IEETitle}{HTML}{7A9FB9}
 
 % TU Graz Colors
 \definecolor{tug}{HTML}{F70146}
@@ -161,9 +180,9 @@
 % -------------------------------------------------
 \hypersetup{
     colorlinks=true,
-    linkcolor=ieeDark,
+    linkcolor=black,
     urlcolor=url,
-    citecolor=ieeDark
+    citecolor=black
 }
 \urlstyle{same}
 \renewcommand{\UrlFont}{\normalfont}
@@ -195,10 +214,23 @@
 % -------------------------------------------------
 % TOC style
 % -------------------------------------------------
-\renewcommand{\cftchapfont}{\bfseries\color{blue}}
-\renewcommand{\cftsecfont}{\color{black}}
-\renewcommand{\cftchappagefont}{\bfseries\color{blue}}
-\renewcommand{\cftsecpagefont}{\color{black}}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftsecfont}{}
+\renewcommand{\cftchappagefont}{\bfseries}
+\renewcommand{\cftsecpagefont}{}
+
+\makeatletter
+\let\iee@oldl@chapter\l@chapter
+\renewcommand*{\l@chapter}[2]{%
+  \needspace{4\baselineskip}%
+  {\hypersetup{linkcolor=blue}\iee@oldl@chapter{#1}{#2}}%
+}
+
+\let\iee@oldl@section\l@section
+\renewcommand*{\l@section}[2]{%
+  {\hypersetup{linkcolor=black}\iee@oldl@section{#1}{#2}}%
+}
+\makeatother
 
 % -------------------------------------------------
 % Chapter / section styles
@@ -391,14 +423,14 @@
 % Optional logo helper
 % Usage: \reportlogo{figures/logo.pdf}
 % -------------------------------------------------
-\newcommand{\ieeiflogo}{%
+\newcommand{\ieeiflogo}[1][1.4cm]{%
     \ifthenelse{\equal{\documentlanguage}{german}}
-    {
-        \includegraphics[height=1.4cm]{figures/Logo_IEE_mit_Schriftzug_DE.png}
-    }{
-        \includegraphics[height=1.4cm]{figures/Logo_IEE_mit_Schriftzug_EN.png}
+    {%
+        \includegraphics[height=#1]{figures/Logo_IEE_mit_Schriftzug_DE.png}%
+    }{%
+        \includegraphics[height=#1]{figures/Logo_IEE_mit_Schriftzug_EN.png}%
     }%
-}%
+}
 
 % -------------------------------------------------
 % Cover page
@@ -416,7 +448,7 @@
     \vspace*{-3.5cm}
     \noindent
     \makebox[\textwidth]{%
-        \ieeiflogo
+        \ieeiflogo[1.4cm]
         \hfill
         \includegraphics[height=1.4cm]{figures/TU_Graz_Logo.pdf}
     }
@@ -497,7 +529,9 @@
                 \ieeuniversity\\
                 Inffeldgasse 18\\
                 8010 Graz\\
-                Austria\\[1em]
+                Austria\\[0.5em]
+                Website: \href{https://iee.tugraz.at}{https://iee.tugraz.at}\\
+                E-Mail: \href{mailto:iee@tugraz.at}{iee@tugraz.at}\\[1em]
                 \copyright~IEE, TU Graz\\
                 Graz, \reportmonth~\reportyear%
                 \ifstrempty{#1}{}{%
@@ -511,6 +545,55 @@
     \newpage
 }
 
+
+% -------------------------------------------------
+% Back page
+% -------------------------------------------------
+\newcommand{\makeieebackpage}{%
+\newgeometry{
+    left=1.5cm,
+    right=1.5cm,
+    top=1.5cm,
+    bottom=1cm,
+}
+\begin{titlepage}
+    \thispagestyle{empty}
+
+    \begin{tikzpicture}[remember picture,overlay]
+        % Dark blue background
+        \fill[blue] (current page.south west) rectangle (current page.north east);
+
+        % Decorative translucent squares
+        \fill[white, opacity=0.5] ([xshift=2.57cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+        \fill[white, opacity=0.5] ([xshift=8.00cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+        \fill[white, opacity=0.5] ([xshift=13.44cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+
+        \fill[white, opacity=0.5] ([xshift=5.06cm,yshift=13.51cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+        \fill[white, opacity=0.5] ([xshift=10.94cm,yshift=18.48cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+
+        % White footer bar
+        \fill[white] ([yshift=1cm]current page.south west) rectangle ([yshift=3.15cm]current page.south east);
+
+        % TU Graz red line
+        \fill[tug] ([yshift=3.15cm]current page.south west) rectangle ([yshift=3.35cm]current page.south east);
+    \end{tikzpicture}
+    
+
+    % Footer logos
+    \vspace*{\fill}
+    \noindent
+    \makebox[\textwidth]{%
+        \ieeiflogo[1.1cm]
+        \hfill
+        \includegraphics[height=1.2cm]{figures/TU_Graz_Logo.pdf}%
+    }
+    \begin{tikzpicture}[remember picture,overlay]
+        \fill[blue] ([yshift=0cm]current page.south west) rectangle ([yshift=1cm]current page.south east);
+    \end{tikzpicture}
+
+\end{titlepage}
+\restoregeometry
+}
 
 % -------------------------------------------------
 % Highlight boxes
