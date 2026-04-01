@@ -550,48 +550,48 @@
 % Back page
 % -------------------------------------------------
 \newcommand{\makeieebackpage}{%
+\clearpage
 \newgeometry{
     left=1.5cm,
     right=1.5cm,
     top=1.5cm,
     bottom=1cm,
 }
-\begin{titlepage}
-    \thispagestyle{empty}
+\addtocounter{page}{-1}
+\thispagestyle{empty}
 
-    \begin{tikzpicture}[remember picture,overlay]
-        % Dark blue background
-        \fill[blue] (current page.south west) rectangle (current page.north east);
+\begin{tikzpicture}[remember picture,overlay]
+    % Dark blue background
+    \fill[blue] (current page.south west) rectangle (current page.north east);
 
-        % Decorative translucent squares
-        \fill[white, opacity=0.5] ([xshift=2.57cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
-        \fill[white, opacity=0.5] ([xshift=8.00cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
-        \fill[white, opacity=0.5] ([xshift=13.44cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+    % Decorative translucent squares
+    \fill[white, opacity=0.5] ([xshift=2.57cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+    \fill[white, opacity=0.5] ([xshift=8.00cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+    \fill[white, opacity=0.5] ([xshift=13.44cm,yshift=16.0cm]current page.south west) rectangle ++(5.0cm,5.0cm);
 
-        \fill[white, opacity=0.5] ([xshift=5.06cm,yshift=13.51cm]current page.south west) rectangle ++(5.0cm,5.0cm);
-        \fill[white, opacity=0.5] ([xshift=10.94cm,yshift=18.48cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+    \fill[white, opacity=0.5] ([xshift=5.06cm,yshift=13.51cm]current page.south west) rectangle ++(5.0cm,5.0cm);
+    \fill[white, opacity=0.5] ([xshift=10.94cm,yshift=18.48cm]current page.south west) rectangle ++(5.0cm,5.0cm);
 
-        % White footer bar
-        \fill[white] ([yshift=1cm]current page.south west) rectangle ([yshift=3.15cm]current page.south east);
+    % White footer bar
+    \fill[white] ([yshift=1cm]current page.south west) rectangle ([yshift=3.15cm]current page.south east);
 
-        % TU Graz red line
-        \fill[tug] ([yshift=3.15cm]current page.south west) rectangle ([yshift=3.35cm]current page.south east);
-    \end{tikzpicture}
-    
+    % TU Graz red line
+    \fill[tug] ([yshift=3.15cm]current page.south west) rectangle ([yshift=3.35cm]current page.south east);
+\end{tikzpicture}
 
-    % Footer logos
-    \vspace*{\fill}
-    \noindent
-    \makebox[\textwidth]{%
-        \ieeiflogo[1.1cm]
-        \hfill
-        \includegraphics[height=1.2cm]{figures/TU_Graz_Logo.pdf}%
-    }
-    \begin{tikzpicture}[remember picture,overlay]
-        \fill[blue] ([yshift=0cm]current page.south west) rectangle ([yshift=1cm]current page.south east);
-    \end{tikzpicture}
 
-\end{titlepage}
+% Footer logos
+\vspace*{\fill}
+\noindent
+\makebox[\textwidth]{%
+    \ieeiflogo[1.1cm]
+    \hfill
+    \includegraphics[height=1.2cm]{figures/TU_Graz_Logo.pdf}%
+}
+\begin{tikzpicture}[remember picture,overlay]
+    \fill[blue] ([yshift=0cm]current page.south west) rectangle ([yshift=1cm]current page.south east);
+\end{tikzpicture}
+
 \restoregeometry
 }
 
