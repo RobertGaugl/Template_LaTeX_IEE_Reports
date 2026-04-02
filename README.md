@@ -54,6 +54,9 @@ The main text area should contain the central narrative of the report.
 
 
 ## Release Notes
+- **2026-04-02:**
+   - Add spacing between references for improved readability.
+   - Align sidebar elements with the main text baseline.
 - **2026-04-01:**
    - First upload.
    - Use squares for itemize.

@@ -332,7 +332,7 @@
       \small #3
       \end{tcolorbox}
     \end{minipage}%
-  }%
+  }[0.5\baselineskip]%
 }
 {}
 
@@ -344,7 +344,7 @@
       {\color{#1}\bfseries \small #2\par}
       \small #3
     \end{minipage}
-  }%
+  }[0.5\baselineskip]%%
 }
 {}
 
@@ -364,7 +364,7 @@
       \ifstrempty{#3}{}{\captionof{figure}{#3}}%
       \ifstrempty{#4}{}{\label{#4}}%
     \end{minipage}%
-  }%
+  }[0.5\baselineskip]%%
 }
 
 \newcommand{\sideIcon}[2]{%
@@ -377,7 +377,7 @@
       }%
       #1\par
     \end{minipage}%
-  }%
+  }[0.5\baselineskip]%%
 }
 
 \newcommand{\sideTable}[2]{%
@@ -387,7 +387,7 @@
       #1
       \captionof{table}{#2}
     \end{minipage}%
-  }%
+  }[0.5\baselineskip]%%
 }
 
 \newtcolorbox{coloredBlock}[2][blue]{%
@@ -648,8 +648,8 @@
 
 \AtEndPreamble{
         \renewcommand*{\bibfont}{\footnotesize}
+        \setlength{\bibitemsep}{0.4em}
         \DeclareFieldFormat[inproceedings]{booktitle}{\color{grey}#1}
         \DeclareFieldFormat*{title}{\textbf{#1}}
-        %\renewcommand*{\newunitpunct}{}
         \renewbibmacro{in:}{}
 }
