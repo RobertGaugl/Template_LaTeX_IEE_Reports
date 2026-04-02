@@ -11,9 +11,20 @@
 \newcommand{\reportyear}{2026}
 \newcommand{\reportmonth}{April}
 \newcommand{\reportauthors}{R. Gaugl}
-\newcommand{\reportpartners}{Partner Company 1, Partner Company 2}
+\newcommand{\reportpartners}{TU Graz, Partner Company 1}
 \newcommand{\reportversion}{1.0}
 \newcommand{\reportcity}{Graz}
+
+% For author page
+\newcommand{\reportauthorlist}{%
+    \reportauthorcompany{TU Graz}
+    % \reportauthorentry{Name}{Role}{\href{mailto:email}{email}}
+    \reportauthorentry{Robert Gaugl}{Assistant Professor}{}
+    \reportauthorentry{Jane Doe}{Project Assistant}{}
+
+    \reportauthorcompany{Partner Company 1}
+    \reportauthorentry{John Doe}{Team Leader}{}
+}
 
 
 %% -----------------------------------------------------------------------------
@@ -75,6 +86,10 @@
 %% IMPRINT PAGE ----------------------------------------------------------------
 \pagenumbering{roman}
 \makeieeimprint[\scriptsize Icons used in this report from Font Awesome (\url{https://fontawesome.com}), licensed under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.]
+
+%% -----------------------------------------------------------------------------
+%% AUTHOR PAGE -----------------------------------------------------------------
+\makeieeauthorpage
 
 %% -----------------------------------------------------------------------------
 %% TABLE OF CONTENTS ----------------------------------------------------------=

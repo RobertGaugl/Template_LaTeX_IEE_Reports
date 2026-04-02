@@ -530,6 +530,32 @@
     \newpage
 }
 
+% -------------------------------------------------
+% Author page
+% -------------------------------------------------
+\newcommand{\reportauthorcompany}[1]{%
+    \par\medskip
+    {\Large\bfseries\textcolor{blue}{#1}\par}
+    \vspace{0.5em}
+}
+
+\newcommand{\reportauthorentry}[3]{%
+    {\bfseries\textcolor{blue}{#1}\\}
+    \ifstrempty{#3}{\ifstrempty{#2}{}{{\footnotesize#2\par}}}{\ifstrempty{#2}{}{{\footnotesize#2\\}}}
+    \ifstrempty{#3}{}{{\footnotesize#3\par}}
+    \vspace{0.8em}
+}
+
+\newcommand{\makeieeauthorpage}{%
+    \clearpage
+    \ifthenelse{\equal{\documentlanguage}{german}}{
+        \chapter*{Autor:innen}
+    }{
+        \chapter*{Authors}
+    } % The header is automatically selected based on the chosen language.
+
+    \reportauthorlist
+}
 
 % -------------------------------------------------
 % Back page
