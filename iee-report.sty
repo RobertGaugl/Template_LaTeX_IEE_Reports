@@ -534,16 +534,23 @@
 % Author page
 % -------------------------------------------------
 \newcommand{\reportauthorcompany}[1]{%
-    \par\medskip
-    {\Large\bfseries\textcolor{blue}{#1}\par}
-    \vspace{0.5em}
+    \par\vspace{1.5em}%
+    \noindent
+    \leavevmode
+    \marginnote{%
+        \begin{minipage}[t]{\marginparwidth}
+            \raggedleft
+            {\large\bfseries\textcolor{subtitle}{#1}\par}
+        \end{minipage}%
+    }[0pt]%
+    \ignorespaces
 }
 
 \newcommand{\reportauthorentry}[3]{%
     {\bfseries\textcolor{blue}{#1}\\}
     \ifstrempty{#3}{\ifstrempty{#2}{}{{\footnotesize#2\par}}}{\ifstrempty{#2}{}{{\footnotesize#2\\}}}
     \ifstrempty{#3}{}{{\footnotesize#3\par}}
-    \vspace{0.8em}
+    \vspace{0.5em}
 }
 
 \newcommand{\makeieeauthorpage}{%
