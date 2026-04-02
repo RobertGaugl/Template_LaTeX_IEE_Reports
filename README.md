@@ -55,6 +55,7 @@ The main text area should contain the central narrative of the report.
 
 ## Release Notes
 - **2026-04-02:**
+   - Automatic sizing of the cover page layout
    - Add actual figures
    - Add horizontal separators to sideNote
    - Add spacing between references for improved readability.

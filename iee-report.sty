@@ -428,22 +428,53 @@
 
     \vfill
 
+    \newsavebox{\ieecoverbox}
+    \newlength{\ieecoverboxheight}
+    \newlength{\ieecoverbandheight}
+    
+    % Measure the content block
+    \sbox{\ieecoverbox}{%
+        \begin{minipage}{\dimexpr\textwidth-5cm\relax}
+            {\large\raggedright \reportpartners\par}
+    
+            \vspace{1.2cm}
+    
+            \begin{tabularx}{\linewidth}{@{}>{\bfseries}l X@{}}
+                \ieeauthorslabel: & \reportauthors \\
+                \ieeversionlabel: & \reportversion \\
+                \ieelocationlabel: & \reportcity \\
+                \ieedatelabel: & \reportmonth~\reportyear \\
+            \end{tabularx}
+        \end{minipage}%
+    }
+    
+    % Measure height
+    \setlength{\ieecoverboxheight}{\dimexpr\ht\ieecoverbox+\dp\ieecoverbox\relax}
+    
+    % Add top/bottom padding
+    \setlength{\ieecoverbandheight}{\dimexpr\ieecoverboxheight+1.2cm\relax}
+    
+    % Minimum band height
+    \ifdim\ieecoverbandheight<4.8cm
+        \setlength{\ieecoverbandheight}{4.8cm}
+    \fi
+    
+    % Draw band and place content
     \begin{tikzpicture}[remember picture,overlay]
-        \fill[blueLight] ([yshift=-14cm]current page.north west) rectangle ([yshift=-19.5cm]current page.north east);
+        % Full-width blue band
+        \fill[blueLight]
+            ([yshift=2cm]current page.center -| current page.west)
+            rectangle
+            ([yshift=\dimexpr 2cm-\ieecoverbandheight\relax]current page.center -| current page.east);
+    
+        % Content block placed inside the band
+        \node[
+            anchor=north west,
+            inner sep=0pt
+        ] at ([xshift=5cm,yshift=1.4cm]current page.center -| current page.west) {%
+            \usebox{\ieecoverbox}
+        };
     \end{tikzpicture}
-
-
-    {\hspace{5cm} \large \reportpartners\par}
-
-    \vspace{1.2cm}
-
-    \hspace{5cm}
-    \begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
-        \ieeauthorslabel: & \reportauthors \\
-        \ieeversionlabel: & \reportversion \\
-        \ieelocationlabel: & \reportcity \\
-        \ieedatelabel: & \reportmonth~\reportyear \\
-    \end{tabularx}
 
     \vfill
 
