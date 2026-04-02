@@ -41,8 +41,9 @@
         group-separator = {.},        % use dot as thousand separator
         group-minimum-digits = 4,     % format large numbers
         group-digits=integer,
-        detect-mode = true,
-        detect-family = false,
+        % detect-mode = true,
+        % detect-family = true,
+        detect-all,
         }
 }{
     \sisetup{
@@ -50,8 +51,9 @@
         group-separator = {~},        % use space as thousand separator
         group-minimum-digits = 4,     % optional: format large numbers
         group-digits=integer,
-        detect-mode = true,
-        detect-family = false,
+        % detect-mode = true,
+        % detect-family = true,
+        detect-all,
     }
 }
 \DeclareSIUnit \watthour {Wh} % apparent power 
@@ -160,7 +162,7 @@ The language setting controls the language-dependent labels in the template. The
 
 \section{General layout concept}
 
-\begin{sideBlock}[yellow]{\faIcon{lightbulb}~~Recommended use}
+\begin{sideBlock}[yellow]{\faIcon{bolt}~~Sidebar usage}
 Use the main text column for arguments, explanations, and results. Use the sidebar for assumptions, short notes, icons, mini figures, or compact contextual information.
 \end{sideBlock}
 
@@ -266,7 +268,7 @@ This is a highlighted recommendation.
 \end{verbatim}
 \end{coloredBlock}
 
-\begin{coloredBlock}[yellow]{\faIcon{bolt}~~Practical recommendation}
+\begin{coloredBlock}[yellow]{\faIcon{bolt}~~Recommendation}
 Use titled blocks when the reader should immediately understand the purpose of the highlighted content. Titles are particularly useful for key findings, recommendations, or structured remarks.
 \end{coloredBlock}
 
@@ -301,7 +303,7 @@ The sidebar is one of the defining features of the template. It allows the autho
 
 \section{Using \texttt{sideBlock}}
 
-\begin{sideBlock}[yellow]{Recommendation}
+\begin{sideBlock}[yellow]{\faIcon{bolt}~~Sidebar content}
 Keep sidebar content concise. A side block should support the main text, not replace it. If the content becomes too long, it should usually move into the main text area.
 \end{sideBlock}
 
@@ -410,13 +412,13 @@ Use the left sidebar for supporting material.
 
 This creates a highlighted block whose title combines an icon and text. The double tilde \texttt{\~{}\~{}} adds a small horizontal space between the icon and the title text.
 
-\begin{coloredBlock}[yellow]{\faIcon{bolt}~~Practical recommendation}
+\begin{coloredBlock}[turquoise]{\faIcon[regular]{lightbulb}~~Design tip}
 Icons can be placed directly in block titles to strengthen the visual structure of the report and to make recurring content types easier to identify.
 \end{coloredBlock}
 
 \section{Design guidance}
 
-\begin{sideBlock}[yellow]{\faIcon{icons}~~Recommendation}
+\begin{sideBlock}[yellow]{\faIcon{bolt}~~Icon style}
 Choose a small number of recurring icons and use them consistently across the report. This creates a clearer visual language than assigning a new icon to every single element.
 \end{sideBlock}
 
@@ -443,16 +445,16 @@ Figures are an important part of many reports. The template supports standard in
 
 A standard figure should be used when the graphic belongs directly to the main flow of the text and can be displayed at the normal text width.
 
-\begin{coloredBlock}[yellow]{Design tip}
+\begin{coloredBlock}[turquoise]{\faIcon[regular]{lightbulb}~~Design tip}
 A subtle grey background (e.g. \texttt{greyLight}) can improve the visual integration of figures. It separates the figure from the main text without drawing too much attention.
 \end{coloredBlock}
 
 \begin{sideNote}[blue]{}
-\textcolor{blue}{\Huge\SI[retain-explicit-plus=true]{+ 140}{\percent}}\\[0.2em]
+\textcolor{blue}{\Huge\bfseries\raisebox{0.4ex}{\Large +}\,\SI{140}{\percent}}\\[0.2em]
 PV capacity\\[1em]
-\textcolor{blue}{\Huge\SI[retain-explicit-plus=true]{+ 62}{\percent}}\\[0.2em]
+\textcolor{blue}{\Huge\bfseries\raisebox{0.4ex}{\Large +}\,\SI{62}{\percent}}\\[0.2em]
 Wind capacity\\[1em]
-between 2022 and 2025
+between 2022 and 2025\\
 \end{sideNote}
 
 \begin{figure}[h]
@@ -653,7 +655,7 @@ The corresponding code is:
 \section{Language-dependent formatting}
 
 \begin{sideNote}[blue]{Formatting note}
-Even when language settings are available, the report should still use a consistent notation for all numerical values and units from beginning to end.
+Even when language settings are available, the report should still use a consistent notation for all numerical values and units.
 \end{sideNote}
 
 The template already adapts the decimal and group separators depending on the selected language. This means that a report in German can use a comma as the decimal separator, while a report in English can use a point, without changing the content manually throughout the file.
@@ -682,7 +684,7 @@ Paragraphs should remain focused. Each paragraph should usually cover one main i
 
 \section{How to use the sidebar effectively}
 
-\begin{sideBlock}[yellow]{\faIcon{pen}~~Writing recommendation}
+\begin{sideBlock}[yellow]{\faIcon{bolt}~~\texttt{sideBlock} length}
 If a sidebar element becomes too long, it is often a sign that the content should be moved into the main text and explained there in full.
 \end{sideBlock}
 
@@ -721,6 +723,10 @@ A typical citation command is:
 For example, storage technologies are often discussed in the literature in the context of system transformation and flexibility provision \citep{Hunt2019}.
 
 \section{Different citation styles}
+
+\begin{sideBlock}[green]{\faIcon[regular]{compass}~~Quick guide}
+Use \texttt{\textbackslash cite\{\}} or \texttt{\textbackslash citep\{\}} when you only want the reference number. Use \texttt{\textbackslash citet\{\}} or \texttt{\textbackslash textcite\{\}} when the authors should appear as part of the sentence.
+\end{sideBlock}
 
 The template supports different citation commands depending on how the reference should appear in the sentence.
 
@@ -775,7 +781,7 @@ Every figure or table that is important for the argument should have a label and
 
 This final chapter summarizes a few practical recommendations for using the template efficiently.
 
-\begin{coloredBlock}[yellow]{\faIcon{screwdriver-wrench}~~Practical tips}
+\begin{coloredBlock}[turquoise]{\faIcon[regular]{lightbulb}~~Practical tips}
 Start with the overall report structure before writing detailed content. Add the main narrative first, then complement it with side notes, side blocks, figures, and tables. Compile frequently to check whether the sidebar content is positioned appropriately and whether page breaks remain visually consistent.
 \end{coloredBlock}
 
