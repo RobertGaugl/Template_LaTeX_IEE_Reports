@@ -1,0 +1,57 @@
+% ------------------------------------------------------------------------------
+% This figure is designed to be compiled separately as a standalone PDF.
+% 
+% For faster compilation of your main document:
+% 1. Compile this .tex file independently to generate a PDF file.
+% 2. Store the generated PDF (e.g., figure_demand.pdf) in your project's
+%    'figures' folder (or another directory of your choice).
+% 3. In your main document, include the figure PDF with:
+%      \includegraphics{figures/figure_demand.pdf}
+%
+% This approach keeps the main document compilation fast and modular.
+% ------------------------------------------------------------------------------
+
+\documentclass[tikz]{standalone}
+
+% Use sans-serif font for text and math
+% \renewcommand{\familydefault}{\sfdefault}
+% \usepackage{sfmath}
+
+% Add white background
+\usetikzlibrary{backgrounds}
+
+% Load pgfplots and set compatibility
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Load your custom color definitions
+\input{reportthemeiee/iee_colors}
+
+\begin{document}
+\begin{tikzpicture}[show background rectangle, background rectangle/.style={fill=white}]
+    \begin{axis}[
+        ybar stacked,
+        bar width=25pt,
+        width=6cm,
+        height=6cm,        % Adjust to fit nicely
+        enlarge x limits=0.25,
+        ymin=0,
+        ylabel={BESS in GW},
+        % xlabel={Year},
+        symbolic x coords={Today,2030,2040},
+        xtick=data,
+        xmajorgrids=false,
+        ymajorgrids=true,
+        major grid style={gray!30},
+        axis line style={draw=none},
+        tick style={draw=none},
+        legend style={at={(0.5,-0.15)}, anchor=north, legend columns=-1, font=\normalsize},
+        area legend,
+    ]
+    ]
+    \addplot+[draw=black, fill=blue] coordinates {(Today,1.0) (2030,3.7) (2040,5.9)};
+    \addplot+[draw=black, fill=yellow] coordinates {(Today,0.9) (2030,1.4) (2040,2.7)};
+    \legend{Small, Large}
+    \end{axis}
+\end{tikzpicture}
+\end{document}

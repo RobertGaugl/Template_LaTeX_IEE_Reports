@@ -3,7 +3,7 @@
 This repository contains a **LaTeX report template** developed by the Institute of Electricity Economics and Energy Innovation (IEE) at Graz University of Technology. It provides a consistent and professional design style for reports, studies, project documents, and technical write-ups related to the institute's courses, research activities, and collaborations.
 
 <p align="center">
-  <img src="figures/Report.png" alt="Example Report Pages" width="80%" /></br>
+  <img src="reportthemeiee/Report.png" alt="Example Report Pages" width="80%" /></br>
   <b>Figure 1.</b> Example pages of the IEE report template.
 </p>
 
@@ -55,6 +55,8 @@ The main text area should contain the central narrative of the report.
 
 ## Release Notes
 - **2026-04-02:**
+   - Add actual figures
+   - Add horizontal separators to sideNote
    - Add spacing between references for improved readability.
    - Align sidebar elements with the main text baseline.
 - **2026-04-01:**

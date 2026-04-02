@@ -320,7 +320,7 @@ Use the left sidebar for supporting material.
 \section{Using \texttt{sideNote}}
 
 \begin{sideNote}[blue]{Assumption}
-Short assumptions, notes, or clarifications are good candidates for a side note.
+Short results, assumptions, or notes are good candidates for a side note.
 \end{sideNote}
 
 The \texttt{sideNote} environment is simpler than \texttt{sideBlock}. It is suitable for short textual remarks without a surrounding frame. It works well for assumptions, writing tips, methodological hints, or compact observations.
@@ -443,11 +443,37 @@ Figures are an important part of many reports. The template supports standard in
 
 A standard figure should be used when the graphic belongs directly to the main flow of the text and can be displayed at the normal text width.
 
+\begin{coloredBlock}[yellow]{Design tip}
+A subtle grey background (e.g. \texttt{greyLight}) can improve the visual integration of figures. It separates the figure from the main text without drawing too much attention.
+\end{coloredBlock}
+
+\begin{sideNote}[blue]{}
+\textcolor{blue}{\Huge\SI[retain-explicit-plus=true]{+ 140}{\percent}}\\[0.2em]
+PV capacity\\[1em]
+\textcolor{blue}{\Huge\SI[retain-explicit-plus=true]{+ 62}{\percent}}\\[0.2em]
+Wind capacity\\[1em]
+between 2022 and 2025
+\end{sideNote}
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{example-image}
-    \caption{Example of a standard figure at the width of the main text column.}
-    \label{fig:standard-figure}
+    \colorbox{greyLight}{%
+        \begin{minipage}{\linewidth}
+            \vspace{0.25cm}
+            \hspace*{0.25cm}%
+            \includegraphics[
+                width=\dimexpr\linewidth-0.5cm\relax
+            ]{figures/installed_capacity_2022-2025.pdf}
+            \captionsetup{
+                width=\dimexpr\linewidth-0.5cm\relax,
+                justification=raggedright,
+                singlelinecheck=false
+            }
+            \caption{Example of a standard figure at the width of the main text column.}
+            \label{fig:standard-figure}
+            \vspace{0.25cm}
+        \end{minipage}%
+    }
 \end{figure}
 
 Standard figures should always have a clear caption and, if they are referenced in the text, a label.
@@ -456,10 +482,6 @@ Standard figures should always have a clear caption and, if they are referenced 
 
 Some graphics require more horizontal space than the main text column provides. In that case, a full-width figure can be used. This format is particularly suitable for complex diagrams, wide charts, or process illustrations.
 
-\begin{coloredBlock}[yellow]{Design tip}
-A subtle grey background (e.g. \texttt{greyLight}) can improve the visual integration of full-width figures. It separates the figure from the main text without drawing too much attention.
-\end{coloredBlock}
-
 \begin{figure}[h]
     \noindent\hspace*{-4.8cm}%
     \colorbox{greyLight}{%
@@ -467,9 +489,8 @@ A subtle grey background (e.g. \texttt{greyLight}) can improve the visual integr
             \vspace{0.25cm}
             \hspace*{0.25cm}%
             \includegraphics[
-                width=\dimexpr\linewidth-0.5cm\relax,
-                height=5cm
-            ]{example-image}
+                width=\dimexpr\linewidth-0.5cm\relax
+            ]{figures/demand_rp.pdf}
             \captionsetup{
                 width=\dimexpr\linewidth-0.5cm\relax,
                 justification=raggedright,
@@ -485,7 +506,7 @@ A subtle grey background (e.g. \texttt{greyLight}) can improve the visual integr
 
 \section{Side figures}
 
-\sideFigure[width=0.85\linewidth]{example-image}{Example of a side figure placed in the left sidebar.}{}{center}
+\sideFigure[width=0.85\linewidth]{figures/battery_storage.pdf}{Example of a side figure placed in the left sidebar.}{}{center}
 
 The command \texttt{\textbackslash sideFigure} allows authors to place a compact figure in the sidebar. This is useful for small icons, supporting charts, or visual references that complement the nearby paragraph.
 
