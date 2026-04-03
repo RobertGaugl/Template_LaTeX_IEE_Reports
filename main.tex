@@ -378,7 +378,7 @@ To use Font Awesome icons, the following package is loaded in the preamble:
 
 \begin{coloredBlock}[grey]{}
 \begin{verbatim}
-\usepackage{fontawesome5}
+\usepackage{fontawesome7}
 \end{verbatim} 
 \end{coloredBlock}
 
@@ -471,8 +471,11 @@ Wind capacity\\[1em]
 between 2022 and 2025\\
 \end{sideNote}
 
+
 \begin{figure}[h]
     \centering
+    \begingroup
+    \setlength{\fboxsep}{0pt}%
     \colorbox{greyLight}{%
         \begin{minipage}{\linewidth}
             \vspace{0.25cm}
@@ -480,6 +483,7 @@ between 2022 and 2025\\
             \includegraphics[
                 width=\dimexpr\linewidth-0.5cm\relax
             ]{figures/installed_capacity_2022-2025.pdf}
+
             \captionsetup{
                 width=\dimexpr\linewidth-0.5cm\relax,
                 justification=raggedright,
@@ -490,6 +494,7 @@ between 2022 and 2025\\
             \vspace{0.25cm}
         \end{minipage}%
     }
+    \endgroup
 \end{figure}
 
 Standard figures should always have a clear caption and, if they are referenced in the text, a label.
@@ -500,6 +505,8 @@ Some graphics require more horizontal space than the main text column provides. 
 
 \begin{figure}[h]
     \noindent\hspace*{-4.8cm}%
+    \begingroup
+    \setlength{\fboxsep}{0pt}%
     \colorbox{greyLight}{%
         \begin{minipage}{\dimexpr\paperwidth-2.2cm-2.2cm\relax}
             \vspace{0.25cm}
@@ -507,6 +514,7 @@ Some graphics require more horizontal space than the main text column provides. 
             \includegraphics[
                 width=\dimexpr\linewidth-0.5cm\relax
             ]{figures/demand_rp.pdf}
+
             \captionsetup{
                 width=\dimexpr\linewidth-0.5cm\relax,
                 justification=raggedright,
@@ -517,6 +525,7 @@ Some graphics require more horizontal space than the main text column provides. 
             \vspace{0.25cm}
         \end{minipage}%
     }
+    \endgroup
 \end{figure}
 
 
