@@ -643,7 +643,7 @@ Consistent formatting of numbers and units is essential in technical reports. Th
 Manual formatting of numbers and units often leads to inconsistencies. For example, decimal markers may change across the report, spaces may be missing between values and units, and large numbers may become difficult to read. Using \texttt{siunitx} avoids these problems.
 
 \begin{coloredBlock}[blue]{Use \texttt{siunitx} consistently}
-Use \texttt{\textbackslash num\{\}} for plain numbers and \texttt{\textbackslash SI\{\}\{\}} for values with units. This keeps the formatting of the entire report consistent.
+Use \texttt{\textbackslash num\{\}} for plain numbers,\texttt{\textbackslash si\{\}} for units without values and \texttt{\textbackslash SI\{\}\{\}} for values with units. This keeps the formatting of the entire report consistent.
 \end{coloredBlock}
 
 \section{Examples}
@@ -651,20 +651,12 @@ Use \texttt{\textbackslash num\{\}} for plain numbers and \texttt{\textbackslash
 The following examples illustrate the intended usage:
 
 \begin{itemize}
-    \item A plain number: \num{12345.67}
-    \item An energy value: \SI{1200}{\mega\watthour}
-    \item A percentage can also be handled consistently: \SI{12.5}{\percent}
+    \item A plain number \texttt{\textbackslash num\{12345.67\}}: \num{12345.67} 
+    \item A unit only \texttt{\textbackslash si\{\textbackslash watt\}}: \si{\watt}
+    \item A value with a unit \texttt{\textbackslash SI\{1200\}\{\textbackslash mega\textbackslash watthour\}}: \SI{1200}{\mega\watthour}
+    \item A percentage value \texttt{\textbackslash SI\{12.5\}\{\textbackslash percent\}}: \SI{12.5}{\percent}
+
 \end{itemize}
-
-The corresponding code is:
-
-\begin{coloredBlock}[grey]{}
-\begin{verbatim}
-\num{12345.67}
-\SI{1200}{\mega\watthour}
-\SI{12.5}{\percent}
-\end{verbatim}
-\end{coloredBlock}
 
 \section{Language-dependent formatting}
 
