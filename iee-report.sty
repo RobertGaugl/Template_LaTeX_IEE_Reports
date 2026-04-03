@@ -549,7 +549,7 @@
 \newcommand{\reportauthorentry}[3]{%
     {\bfseries\textcolor{blue}{#1}\\}
     \ifstrempty{#3}{\ifstrempty{#2}{}{{\footnotesize#2\par}}}{\ifstrempty{#2}{}{{\footnotesize#2\\}}}
-    \ifstrempty{#3}{}{{\footnotesize#3\par}}
+    \ifstrempty{#3}{}{{\footnotesize\href{mailto:#3}{#3}\par}}
     \vspace{0.5em}
 }
 
