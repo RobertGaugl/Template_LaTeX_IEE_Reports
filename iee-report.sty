@@ -21,7 +21,6 @@
 \RequirePackage{tabularx}
 \RequirePackage{array}
 \RequirePackage{enumitem}
-\RequirePackage{hyperref}
 \RequirePackage{tocloft}
 \RequirePackage{caption}
 \RequirePackage{parskip}
@@ -39,8 +38,10 @@
 %===============================================================================
 \ifthenelse{\equal{\documentlanguage}{german}}{
     \RequirePackage[ngerman]{babel}       % German hyphenation and terms
+    \RequirePackage{hyperref}             % Needs to be loaded after babel
 }{
     \RequirePackage[english]{babel}       % English hyphenation and terms
+    \RequirePackage{hyperref}             % Needs to be loaded after babel
 }
 
 %===============================================================================
