@@ -44,6 +44,7 @@
     \RequirePackage{hyperref}             % Needs to be loaded after babel
 }
 
+
 %===============================================================================
 % Lists
 %===============================================================================
@@ -126,6 +127,28 @@
 
 % Colors are defined in a seperate file
 \input{reportthemeiee/iee_colors}
+
+
+% -------------------------------------------------
+% Internal-use disclaimer
+% -------------------------------------------------
+
+\AddToHook{shipout/foreground}{%
+    \ifdefined\ieedisclaimertext
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[
+                rotate=90,
+                anchor=south,
+                text=grey,
+                font=\sffamily\bfseries\scriptsize,
+                inner sep=0pt
+            ]
+            at ([xshift=-4mm]current page.east) {%
+                \ieedisclaimertext
+            };
+        \end{tikzpicture}%
+    \fi
+}
 
 
 % -------------------------------------------------
@@ -491,7 +514,24 @@
 
 
     \begin{tikzpicture}[remember picture,overlay]
-        \fill[blue] ([yshift=0cm]current page.south west) rectangle ([yshift=1cm]current page.south east);
+        % Disclaimer on cover page
+        \ifdefined\ieedisclaimertext
+            \node[
+                anchor=south,
+                text=blue,
+                font=\sffamily\bfseries\small
+            ]
+            at ([yshift=1.35cm]current page.south) {%
+                \ieedisclaimertext
+            };
+        \fi
+    
+        % Bottom blue bar
+        \fill[blue]
+            ([yshift=0cm]current page.south west)
+            rectangle
+            ([yshift=1cm]current page.south east);
+    
     \end{tikzpicture}
 \end{titlepage}
 \restoregeometry
